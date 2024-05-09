@@ -4,6 +4,7 @@ import PersonalNeeds from './components/Recruitment/personalNeeds';
 import './assets/css/index.css'
 import Test from './components/Recruitment/test'
 import Users from './components/users/users';
+
 function App() {
   return (
     <>
@@ -13,7 +14,6 @@ function App() {
         <Route  path='/' element={<Test/>}/>
       </Routes>
     </>
-
   );
 }
 
