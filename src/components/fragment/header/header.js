@@ -2,8 +2,8 @@ import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -14,11 +14,14 @@ import MenuItem from '@mui/material/MenuItem'
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import * as React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Box from '@mui/material/Box';
+import logoCodeGym from '../../../assets/image/logoCodeGym.jpg'
+import avatarDemo from '../../../assets/image/boy_2.jpg'
+import './header.css'
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const drawerWidth = 240;
-
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -39,8 +42,8 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function Header() {
-     // Notification
-     const StyledIconWrapper = styled(Box)(({ theme }) => ({
+    // Notification
+    const StyledIconWrapper = styled(Box)(({ theme }) => ({
         position: 'relative',
         display: 'inline-flex',
         alignItems: 'center',
@@ -93,21 +96,16 @@ export default function Header() {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    return(
+    return (
         <>
-         <AppBar position="fixed" sx={{ backgroundColor: 'orange' }}>
+            <AppBar position="fixed" sx={{ backgroundColor: 'orange' }}>
+                
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        // onClick={handleDrawerOpen}
-                        edge="start"
-                     
-                    >
-                        <HomeIcon sx={{ fontSize: 30 }} />
-                    </IconButton>
+                    <Avatar sx={{ m: 1, bgcolor: 'blue', width: '35px', height: '35px' }}>
+                        <img src={logoCodeGym} style={{ width: '35px', height: '35px' }} />
+                    </Avatar>
                     <Typography variant="h6" noWrap component="div">
-                        Tyson Lại - Hệ thống quản lý đào tạo
+                        Aristotle - Hệ thống quản lý đào tạo
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <Box sx={{ marginRight: '10px' }}>
@@ -117,7 +115,7 @@ export default function Header() {
                     </Box>
                     <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <Avatar className='avt-img' alt="Remy Sharp" src={avatarDemo} />
                             <ArrowDropDownIcon />
                         </IconButton>
                     </Tooltip>

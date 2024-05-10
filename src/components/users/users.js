@@ -1,5 +1,5 @@
 import { Box, Dialog, DialogContent, IconButton, FormControl, InputLabel, MenuItem, Select, Typography, Link } from "@mui/material";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
+// import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Footer from "../fragment/footer/footer";
 import Header from "../fragment/header/header";
 import Navbar from "../fragment/navbar/navbar";
@@ -12,9 +12,10 @@ import CreateIcon from '@mui/icons-material/Create';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useState } from "react";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+// import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useLocation } from "react-router-dom";
 import GroupIcon from '@mui/icons-material/Group';
+import './users.css'
 
 export default function Users() {
     const location = useLocation();
@@ -55,7 +56,7 @@ export default function Users() {
         <>
             <Header />
             <Navbar />
-            <Box component="main" sx={{ flexGrow: 1, p: 2, marginTop: '64px', marginLeft: '64px' }}>
+            <Box component="main" sx={{ flexGrow: 1, p: 2, marginTop: '57px', marginLeft: '64px' }}>
                 <Box m={2} style={{ display: 'flex' }}>
                     {/* <Breadcrumbs
                         aria-label='breadcrumb'
@@ -65,8 +66,8 @@ export default function Users() {
                         <Link underline="hover" href='#'>Access</Link>
                         <Typography color='text.primary'><GroupIcon /> Users</Typography>
                     </Breadcrumbs> */}
-                    <GroupIcon style={{paddingBottom: '3px'}}/>
-                    <p color='text.primary' style={{marginLeft: '10px', marginBottom: '0px', fontFamily: 'sans-serif', fontWeight: '550'}}>Quản lý người dùng</p>
+                    <GroupIcon style={{ paddingBottom: '3px', color: 'rgba(0, 0, 0, 0.60)' }} />
+                    <p style={{ marginLeft: '10px', marginBottom: '0px', fontFamily: 'sans-serif', fontWeight: '550', color: 'rgba(0, 0, 0, 0.60)' }}>Quản lý người dùng</p>
                 </Box>
                 <div className="content-recruiment">
                     <div className=" d-flex align-items-centent justify-content-between">
@@ -99,7 +100,7 @@ export default function Users() {
                         <div className="d-flex justify-content-between">
                             <div className="d-flex">
                                 <div className="search-input position-relative">
-                                    <input type="text" className="w-px position-relative" style={{width: '300px'}} placeholder="Tìm kiếm với tên hoặc email..." />
+                                    <input type="text" className="w-px position-relative" style={{ width: '300px' }} placeholder="Tìm kiếm với tên hoặc email..." />
                                     <svg className="search-icon position-absolute" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="rgb(131 125 125 / 87%)" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14" /></svg>
                                 </div>
                                 <FormControl className="h-px" sx={{ minWidth: '250px' }}>
@@ -121,7 +122,7 @@ export default function Users() {
                         </div>
                     </div>
                     <div>
-                        <table className=" table ">
+                        <table className=" table table-user">
                             <tr className="header-tr grey-text">
                                 <th>STT</th>
                                 <th>Tên</th>

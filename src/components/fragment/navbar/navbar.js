@@ -17,10 +17,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-
 const drawerWidth = 240;
-
-
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -51,8 +48,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
-
-
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -98,11 +93,10 @@ export default function Navbar() {
         setOpen(true);
     };
 
-    
     const handleDrawerClose = (event) => {
         const drawer = document.getElementById('drawer')
         setOpen(false);
-        if(!drawer.contains(event.relatedTarget)){
+        if (!drawer.contains(event.relatedTarget)) {
             setOpenChil(prevState => {
                 const newState = { ...prevState };
                 Object.keys(newState).forEach(key => newState[key] = false);
@@ -111,10 +105,15 @@ export default function Navbar() {
         }
     };
 
-
+    const iconBook = () => {
+        return (
+            <svg style={{ width: '23px', height: '23px' }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor"
+                d="M464 48c-67.61.29-117.87 9.6-154.24 25.69c-27.14 12-37.76 21.08-37.76 51.84V448c41.57-37.5 78.46-48 224-48V48ZM48 48c67.61.29 117.87 9.6 154.24 25.69c27.14 12 37.76 21.08 37.76 51.84V448c-41.57-37.5-78.46-48-224-48V48Z" /></svg>
+        )
+    }
 
     const listItems = [
-        { id: 1, text: "Đào tạo", IconText: ImportContactsIcon },
+        { id: 1, text: "Đào tạo", IconText: iconBook },
         { id: 2, text: "Tuyển dụng", IconText: BusinessCenterIcon, children: ["Nhu cầu", "Kế hoạch tuyển dụng", "Phỏng vấn"] },
         { id: 3, text: "Thống kê", IconText: SignalCellularAltIcon }
     ]
@@ -124,9 +123,7 @@ export default function Navbar() {
     };
 
     return (
-        <Box
-        
-            sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex' }}>
             <CssBaseline />
 
             <Drawer

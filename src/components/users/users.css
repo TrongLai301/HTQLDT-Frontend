@@ -1,0 +1,5 @@
+.table-user th, 
+.table-user td{
+    text-align: center;
+    flex: 1;
+}
