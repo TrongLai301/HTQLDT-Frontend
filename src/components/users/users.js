@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import GroupIcon from '@mui/icons-material/Group';
 import './users.css'
+import DialogUpdateUserForm from "./updateUser";
 
 export default function Users() {
     const location = useLocation();
@@ -139,8 +140,9 @@ export default function Users() {
                                     <td>{item.role}</td>
                                     <td className=" text-center">{item.status}</td>
                                     <td className=" text-center">
-                                        <RemoveRedEyeIcon className="color-blue white-div font-size-large" />
-                                        <CreateIcon className="color-orange pencil-btn font-size-medium" />
+                                        {/* <RemoveRedEyeIcon className="color-blue white-div font-size-large" /> */}
+                                        {/* <CreateIcon className="color-orange pencil-btn font-size-medium" /> */}
+                                        <DialogUpdateUserForm />
                                     </td>
                                 </tr>
                             ))}

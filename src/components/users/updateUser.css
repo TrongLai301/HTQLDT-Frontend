@@ -1,0 +1,20 @@
+.wrapper-update ::-webkit-scrollbar {
+    width: 0;
+}
+
+.information-user{
+    font-size: 20px;
+    font-weight: 0;
+}
+
+.send-btn {
+    width: 80px;
+    text-align: left;
+    background-color: #388738;
+    color: #fdfdfd;
+    border-radius: 3px;
+}
+
+.css-ahj2mt-MuiTypography-root{
+    font-size: 20px;
+}
