@@ -28,7 +28,7 @@ import { Icon } from '@iconify/react';
 // import {faEnvelop} from ''
 import './training.css';
 import axios from "axios";
-import {MarkInternModal} from "../pages/InternPage/markInternModal";
+import { MarkInternModal } from "../pages/InternPage/markInternModal";
 import { text } from "@fortawesome/fontawesome-svg-core";
 
 function Copyright(props) {
@@ -80,7 +80,7 @@ export default function Training() {
 
         { id: 1, text: "Đang thực tập", name: "training" },
         { id: 2, text: "Đã hoàn thành", name: "trained" },
-        {id: 3, text: "Đã dừng thực tập", name: "stop_training"}
+        { id: 3, text: "Đã dừng thực tập", name: "stop_training" }
     ]
 
     const handleChangeSearch = (event) => {
@@ -138,6 +138,14 @@ export default function Training() {
         }
     };
 
+    const changeDayPosition = (dateStart) => {
+        const date = new Date(dateStart);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
 
 
     return (
@@ -149,7 +157,7 @@ export default function Training() {
                     <Icon style={{ width: 23, height: 23, color: 'rgba(0, 0, 0, 0.60)' }} icon="ion:book-sharp" />
                     <p style={{ marginLeft: '10px', marginBottom: '0px', fontFamily: 'sans-serif', fontWeight: '550', color: 'rgba(0, 0, 0, 0.60)' }}>Đào tạo</p>
                 </Box>
-                <div style={{marginTop: '-5px'}} className=" d-flex align-items-centent justify-content-between pl-15">
+                <div style={{ marginTop: '-5px' }} className=" d-flex align-items-centent justify-content-between pl-15">
                     <p className="title text-center mb-0">
                         Quản lý đào tạo
                     </p>
@@ -177,7 +185,7 @@ export default function Training() {
                 </Dialog>
                 <div className=" mt-3">
                     <div className="d-flex justify-content-between">
-                        <div style={{marginTop: '-7px'}} className="d-flex pl-15">
+                        <div style={{ marginTop: '-7px' }} className="d-flex pl-15">
                             <div className="search-input position-relative ">
                                 <input
                                     type="text"
@@ -223,7 +231,7 @@ export default function Training() {
                     <div className="table-container">
                         <table className="table_training" style={{ display: 'flex', alignItems: 'center' }}>
                             <div className="no-scrolling">
-                                <tr style={{alignItems: 'center'}} className="header-tr grey-text">
+                                <tr style={{ alignItems: 'center' }} className="header-tr grey-text">
                                     <th className="training-id">STT</th>
                                     <th>Tên</th>
                                     <th>Bắt đầu</th>
@@ -233,13 +241,13 @@ export default function Training() {
                                     <tr className="grey-text count-tr" key={item.id}>
                                         <td className="training-id">{index + 1 + pagination.page * pagination.size}</td>
                                         <td>{item.userName}</td>
-                                        <td>{item.startDate}</td>
+                                        <td>{changeDayPosition(item.startDate)}</td>
                                         <td>{item.numberDate}</td>
                                     </tr>
                                 ))}
                             </div>
                             <div className="wrapper">
-                                <tr style={{alignItems: 'center'}} className="header-tr grey-text">
+                                <tr style={{ alignItems: 'center' }} className="header-tr grey-text">
                                     {listSubjectSelect.map(item => (
                                         <th value={item.name} key={item.id}>{item.name}</th>
                                     ))}
@@ -253,22 +261,30 @@ export default function Training() {
                                 ))}
                             </div>
                             <div className="no-scrolling">
-                                <tr style={{alignItems: 'center'}} className="header-tr grey-text">
+                                <tr style={{ alignItems: 'center' }} className="header-tr grey-text">
                                     <th>Tổng kết</th>
                                     <th>Đánh giá trên team</th>
+                                    <th>Kết quả thực tập</th>
                                     <th className=" text-center">Hành động</th>
                                 </tr>
                                 {listInter.map(item => (
                                     <tr className="grey-text count-tr" key={item.id}>
                                         <td>{item.finalScore}</td>
                                         <td>
-                                            {item.scoreInTeam == "" || item.scoreInTeam == null ?  "NA" : item.scoreInTeam}
-                                        
-                                        </td>
+                                            {item.scoreInTeam == "" || item.scoreInTeam == null ? "NA" : item.scoreInTeam}
 
-                                        <td style={{cursor: 'pointer'}}>
-                                           <MarkInternModal updateFunction={update} userID={item.id} />
                                         </td>
+                                        <td>
+                                       
+                                       {item.pass === null ? "NA" : (item.pass ?
+                                           <span style={{ color: "green" }}>Pass</span> :
+                                           <span style={{ color: "red" }}>Fail</span>)}
+                                               </td>
+
+                                        <td style={{ cursor: 'pointer' }}>
+                                            <MarkInternModal updateFunction={update} userID={item.id} />
+                                        </td>
+                                   
                                     </tr>
                                 ))}
                             </div>

@@ -122,7 +122,7 @@ export function MarkInternModal({ userID, updateFunction }) {
         if (result % 1 === 0) {
             result = result.toFixed(1)
         }
-        if (result > 7) {
+        if (result >= 7) {
             return (<div className={"result"}> {result}
                 <div className={"result-icon success"}><FontAwesomeIcon icon={faCheck} /></div>
             </div>)
@@ -162,7 +162,7 @@ export function MarkInternModal({ userID, updateFunction }) {
         // axios.defaults.headers.common["Authorization"] = "Bearer " + currentUser.accessToken;
         // axios.get(`http://localhost:8080/api/interns/?id=${param.id}`).then(res => {
         //     // compareObjects(res.data,data);
-        // })
+        // }) 
         setFinalScoreValue(
             parseFloat(
                 finalScore.current.reduce((a, b) => a + b, 0) / finalScore.current.length)
