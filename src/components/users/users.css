@@ -59,6 +59,7 @@ div .table-user td {
     min-width: 200px;
     padding: 8px;
     text-align: center;
+    height: 45px;
 }
 
 .user-name{

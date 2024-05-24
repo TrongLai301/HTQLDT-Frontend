@@ -34,13 +34,14 @@ div .table-container th{
     text-align: center;
     min-width: 140px;
     flex: 1 !important;
+    height: 45px;
     padding: 8px;
     white-space: nowrap;
 }
 
 .table_training div{
     flex: 1;
-    height: auto;
+    height: 550px;
 }
 
 /* .table_training th{
@@ -52,7 +53,7 @@ div .table-container th{
 .wrapper {
     width: 330px;
     /* background-color: white; */
-    margin-top: 15px;
+    /* margin-top: 15px; */
     overflow-x: auto;
     flex-flow: column;
     text-wrap: nowrap;

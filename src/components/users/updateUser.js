@@ -10,7 +10,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './updateUser.css';
 import '../../assets/css/cssRecruitment/recruitment.css';
-import swal from 'sweetalert';
 
 export default function DialogUpdateUserForm({ userId, onUpdate }) {
     const [open, setOpen] = useState(false);
@@ -48,16 +47,12 @@ export default function DialogUpdateUserForm({ userId, onUpdate }) {
         onSubmit: async (values) => {
             try {
                 await axios.put(`http://localhost:8080/admin/users/update/${userId}`, values);
-                swal('Cập nhật thông tin người dùng thành công!', {
-                    icon: "success",
-                    autoHideDuration: 3000
-                  });
+                enqueueSnackbar('Cập nhật thành công!', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
                 onUpdate();
                 setOpen(false);
             } catch (error) {
-                swal("Đã xảy ra lỗi khi xử lý yêu cầu!", {
-                    icon: "error",
-                  });            }
+                enqueueSnackbar("Cập nhật thất bại!", { variant: "error", anchorOrigin: { horizontal: "right", vertical: "top" }, autoHideDuration: 3000 });
+            }
         },
     });
 

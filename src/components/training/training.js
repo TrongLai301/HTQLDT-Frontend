@@ -9,13 +9,12 @@ import {
     Select,
     Typography,
     Link,
-    ModalRoot,
-    Tooltip
+    ModalRoot
 } from "@mui/material";
 import Footer from "../fragment/footer/footer";
 import Header from "../fragment/header/header";
 import Navbar from "../fragment/navbar/navbar";
-// import "../../assets/css/cssRecruitment/recruitment.css";
+import "../../assets/css/cssRecruitment/recruitment.css";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.css"
 import ClearIcon from '@mui/icons-material/Clear';
 import imagePractice from '../../assets/image/logoCodeGym.png'
@@ -148,7 +147,6 @@ export default function Training() {
     }
 
 
-
     return (
         <>
             <Header />
@@ -186,7 +184,7 @@ export default function Training() {
                 </Dialog>
                 <div className=" mt-3">
                     <div className="d-flex justify-content-between">
-                        <div className="d-flex pl-15">
+                        <div style={{ marginTop: '-7px' }} className="d-flex pl-15">
                             <div className="search-input position-relative ">
                                 <input
                                     type="text"
@@ -234,25 +232,21 @@ export default function Training() {
                             <div className="no-scrolling">
                                 <tr style={{ alignItems: 'center' }} className="header-tr grey-text">
                                     <th className="training-id">STT</th>
-                                    <th className="training-name">Tên</th>
+                                    <th>Tên</th>
                                     <th>Bắt đầu</th>
                                     <th>Số ngày thực tập</th>
                                 </tr>
                                 {listInter.map((item, index) => (
                                     <tr className="grey-text count-tr" key={item.id}>
-                                        <td className="training-id" style={{ padding: '8px' }}>{index + 1 + pagination.page * pagination.size}</td>
-                                        <td>
-                                            <Tooltip title={item.userName} arrow>
-                                                <span className="training-name">{item.userName}</span>
-                                            </Tooltip>
-                                        </td>
-                                        <td>{item.startDate}</td>
+                                        <td className="training-id">{index + 1 + pagination.page * pagination.size}</td>
+                                        <td>{item.userName}</td>
+                                        <td>{changeDayPosition(item.startDate)}</td>
                                         <td>{item.numberDate}</td>
                                     </tr>
                                 ))}
                             </div>
                             <div className="wrapper">
-                                <tr style={{ alignItems: 'center', fontSize: '25px' }} className=" grey-text">
+                                <tr style={{ alignItems: 'center' }} className="header-tr grey-text">
                                     {listSubjectSelect.map(item => (
                                         <th value={item.name} key={item.id}>{item.name}</th>
                                     ))}
@@ -269,7 +263,7 @@ export default function Training() {
                                 <tr style={{ alignItems: 'center' }} className="header-tr grey-text">
                                     <th>Tổng kết</th>
                                     <th>Đánh giá trên team</th>
-                                    <th>Kết quả</th>
+                                    <th>Kết quả thực tập</th>
                                     <th className=" text-center">Hành động</th>
                                 </tr>
                                 {listInter.map(item => (
@@ -277,32 +271,34 @@ export default function Training() {
                                         <td>{item.finalScore}</td>
                                         <td>
                                             {item.scoreInTeam == "" || item.scoreInTeam == null ? "NA" : item.scoreInTeam}
-                                        </td>
 
+                                        </td>
                                         <td>
-
-                                            {item.pass === null ? "NA" : (item.pass ?
-                                                <span style={{ color: "green" }}>Pass</span> :
-                                                <span style={{ color: "red" }}>Fail</span>)}
-                                        </td>
+                                       
+                                       {item.pass === null ? "NA" : (item.pass ?
+                                           <span style={{ color: "green" }}>Pass</span> :
+                                           <span style={{ color: "red" }}>Fail</span>)}
+                                               </td>
 
                                         <td style={{ cursor: 'pointer' }}>
                                             <MarkInternModal updateFunction={update} userID={item.id} />
                                         </td>
-
+                                   
                                     </tr>
                                 ))}
                             </div>
                         </table>
                     </div>
-                    <div className="position-absolute w-100" style={{ bottom: '12px' }}>
+                    <Stack spacing={1} style={{ marginTop: '40px', alignItems: 'center' }}>
                         <Pagination
-                            className="d-flex justify-content-center "
+                            className="d-flex justify-content-center"
                             count={Math.ceil(pagination.totalElements / pagination.size)}
                             page={pagination.page + 1}
+                            shape="rounded"
                             onChange={handlePageChange}
                         />
-                    </div>
+
+                    </Stack>
 
 
                     {/* <div className=" bottom-0 position-absolute w-100 left-0" style={{ marginBottom: '20px' }}>

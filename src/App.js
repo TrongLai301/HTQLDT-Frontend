@@ -38,8 +38,7 @@ function App() {
                 } />
                 <Route path={"/training/stats"} element={
                     <AuthContext><TrainingStats /></AuthContext>
-                }>
-                </Route>
+                } />
                 <Route path={"/recruitment/stats"} element={
                     <AuthContext><RecruitmentStats /></AuthContext>
                 }>
