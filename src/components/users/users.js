@@ -230,7 +230,6 @@ export default function Users() {
                 <div className="content-recruiment position-relative" style={{ borderRadius: '10px' }}>
                     <div className="table-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
                         <div className="table-user">
-
                             <thead>
                                 <tr className="grey-text">
                                     <th className="user-id">STT</th>
