@@ -163,10 +163,10 @@ function Navbar() {
                 , {
                     id: 2,
                     name: "Kết quả tuyển dụng",
-                    linkTo: "/recruitment/personalNeeds",
+                    linkTo: "/recruitment/stats",
                 }, {
                     id: 3,
-                    name: "Thống kê sau quả đào tạo",
+                    name: "Thống kê sau đào tạo",
                     linkTo: "/recruitment/personalNeeds",
                 },
             ]

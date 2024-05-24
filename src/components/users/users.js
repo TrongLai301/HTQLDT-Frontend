@@ -7,13 +7,14 @@ import {
     MenuItem,
     Select,
     Typography,
-    Link, Switch
+    Link, Switch,
+    Tooltip
 } from "@mui/material";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Footer from "../fragment/footer/footer";
 import Header from "../fragment/header/header";
 import Navbar from "../fragment/navbar/navbar";
-import "../../assets/css/cssRecruitment/recruitment.css";
+// import "../../assets/css/cssRecruitment/recruitment.css";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.css"
 import ClearIcon from '@mui/icons-material/Clear';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
@@ -227,13 +228,13 @@ export default function Users() {
                     </div>
                 </div>
                 <div className="content-recruiment position-relative" style={{ borderRadius: '10px' }}>
-                    <div className="table-container">
-                        <table className="table-user " aria-label="simple table">
+                    <div className="table-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
+                        <div className="table-user">
 
-                            <thead style={{ marginBottom: '-35px' }}>
-                                <tr className="header-tr grey-text">
+                            <thead>
+                                <tr className="grey-text">
                                     <th className="user-id">STT</th>
-                                    <th>Tên</th>
+                                    <th className="user-name" style={{ padding: '8px' }}>Tên</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
                                     <th className="user-roles">Vai trò</th>
@@ -241,11 +242,16 @@ export default function Users() {
                                     <th className="user-actions">Hành động</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {listUser.map((item, index) => (
                                     <tr className="grey-text count-tr" key={item.id}>
                                         <td className="user-id">{index + 1 + pagination.page * pagination.size}</td>
-                                        <td>{item.name}</td>
+                                        <td style={{ padding: '8px' }}>
+                                            <Tooltip title={item.name} arrow>
+                                                <span className="user-name">{item.name}</span>
+                                            </Tooltip>
+                                        </td>
                                         <td>{item.email}</td>
                                         <td>{item.phone}</td>
                                         <td className="user-roles">
@@ -264,16 +270,16 @@ export default function Users() {
                                             )}
                                         </td>
                                         <td>
-                                            <BlockUser inputProps={{ 'aria-label': 'controlled' }} token={token} userId={item.id} status={item.status} onUpdate={handleFilterWithFields}/>                                       
+                                            <BlockUser inputProps={{ 'aria-label': 'controlled' }} token={token} userId={item.id} status={item.status} onUpdate={handleFilterWithFields} />
                                         </td>
                                         <td className="user-actions">
                                             {/* <RemoveRedEyeIcon className="color-blue white-div font-size-large" /> */}
-                                            <DialogUpdateUserForm token={token} userId={item.id} onUpdate={handleFilterWithFields} />  
+                                            <DialogUpdateUserForm token={token} userId={item.id} onUpdate={handleFilterWithFields} />
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
-                        </table>
+                        </div>
 
                         {/* <Stack spacing={1} style={{marginTop: '190px', alignItems: 'center', alignItems: 'center', marginTop: '50px' }}>
                             <Pagination
@@ -285,18 +291,16 @@ export default function Users() {
                         </Stack> */}
                     </div>
 
-                    <div className=" bottom-0 position-absolute w-100" style={{ marginBottom: '20px', left: 0 }}>
+                    <div className="position-absolute w-100" style={{ bottom: '12px' }}>
                         <Pagination
-                            className="d-flex justify-content-center"
+                            className="d-flex justify-content-center "
                             count={Math.ceil(pagination.totalElements / pagination.size)}
                             page={pagination.page + 1}
-                            shape="rounded"
-
                             onChange={handlePageChange}
                         />
                     </div>
                 </div>
-            </Box>
+            </Box >
             <div style={{ paddingTop: '15px', paddingBottom: '10px', width: '100%', height: '30px', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                 <Copyright sx={{ maxWidth: '100%' }} />
             </div>

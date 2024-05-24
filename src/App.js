@@ -9,6 +9,7 @@ import HomePage from "./components/pages/homePage/homePage";
 import {MarkInternModal} from "./components/pages/InternPage/markInternModal";
 import './assets/css/index.css'
 import TrainingStats from './components/stats/trainingStats/trainingStats';
+import RecruitmentStats from './components/stats/recruitmentStats/recruitmentStats';
 function App() {
     return (
         <>
@@ -37,6 +38,10 @@ function App() {
                 } />
                 <Route path={"/training/stats"} element={
                     <AuthContext><TrainingStats /></AuthContext>
+                }>
+                </Route>
+                <Route path={"/recruitment/stats"} element={
+                    <AuthContext><RecruitmentStats /></AuthContext>
                 }>
                 </Route>
             </Routes>

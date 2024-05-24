@@ -3,27 +3,7 @@
 }
 
 .table-user {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    flex: 1;
-}
-
-.table-user tr {
-    display: flex;
-}
-
-.table-user td:not(.user-roles, user-actions),
-.table-user th:not(.user-roles, user-actions) {
-    text-align: center;
-    min-width: 120px;
-    flex: 1;
-    padding: 8px;
-}
-
-.user-id {
-    max-width: 60px;
-    padding-left: 0;
+    width: 100%;
 }
 
 .input-username-email{
@@ -64,8 +44,25 @@
     padding: 8px;
 }
 
-.user-actions{
-    width: 150px;
-    text-align: center;
+div .table-user th{
+    height: 100px;
+    line-height: 100px;
+    font-size: 25px;
+    font-weight: 400;
+    flex: 1;
+}
+
+div .table-user tr, 
+div .table-user th, 
+div .table-user td {
+    flex: 1;
+    min-width: 200px;
     padding: 8px;
+    text-align: center;
+}
+
+.user-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -6,6 +6,11 @@
     width: 100%;
 }
 
+div .table-container th{
+    height: 100px;
+    line-height: 100px;
+}
+
 .table_training {
     display: flex;
     flex-direction: row;
@@ -19,17 +24,23 @@
     flex-direction: column;
 }
 
-.table_training tr {
+/* .table_training tr {
     display: flex;
-}
+} */
 
-.table_training td,
-.table_training th {
+.table_training div td:not(.training-id, .training-name),
+.table_training div th:not(.training-id, .training-name) {
     align-items: center;
     text-align: center;
-    width: 160px;
-    flex: 1;
+    min-width: 140px;
+    flex: 1 !important;
     padding: 8px;
+    white-space: nowrap;
+}
+
+.table_training div{
+    flex: 1;
+    height: auto;
 }
 
 /* .table_training th{
@@ -42,17 +53,24 @@
     width: 330px;
     /* background-color: white; */
     margin-top: 15px;
-    display: flex;
     overflow-x: auto;
     flex-flow: column;
-    flex: 1;
-    /* margin-top: 15px; */
-    /* text-wrap: nowrap; */
+    text-wrap: nowrap;
+}
+
+.wrapper th{
+    font-weight: 400;
 }
 
 .training-id {
+    text-align: center;
+    min-width: 100px;
+}
+
+.training-name{
+    text-align: center;
     max-width: 60px;
-    padding-left: 0;
+    flex: 1;
 }
 
 .input-intern{
@@ -84,4 +102,13 @@
 
 .pl-15{
     padding-left: 15px;
+}
+
+table .table-training tr, 
+table .table-training th, 
+table .table-training td {
+    flex: 1;
+    min-width: 140px;
+    padding: 8px;
+    text-align: center;
 }

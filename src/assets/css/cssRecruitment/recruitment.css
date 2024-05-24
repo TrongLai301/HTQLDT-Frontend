@@ -86,8 +86,8 @@
 }
 
 .header-tr {
-    height: 100px;
-    margin-bottom: 10px;
+    min-height: 100px;
+    /* margin-bottom: 10px; */
     font-size: 25px;
 }
 
