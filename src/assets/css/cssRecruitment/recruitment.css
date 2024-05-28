@@ -334,6 +334,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .align-item-center {
     align-items: center !important;
 }
+
 .align-item-flex-end {
     align-items: flex-end !important;
 }
@@ -436,6 +437,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 18px;
     justify-content: flex-end;
 }
+
 .date-set div input {
     text-align: center;
     color: #687168;
@@ -443,8 +445,24 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .text-area-field .MuiFormControl-root {
     width: 100%;
-    padding:10px;
+    padding: 10px;
     padding-left: 0;
+}
+.w-auto-complete .base-Popper-root{
+    white-space: nowrap;
+    min-width: 420px;
+    max-height: 200px;
+    /* height: 30px !important; */
+}
+.auto-complete .MuiInputBase-root {
+    position: relative;
+    height: 35px;
+}
+
+.auto-complete .MuiInputBase-root  input {
+    position: absolute;
+    width: 75% !important;
+    padding-right: 30px !important;
 }
 
 
@@ -512,26 +530,32 @@ input[type="number"]::-webkit-outer-spin-button {
 .hover-primary {
     transition: 0.2s ease-in-out;
 }
-.page{
+
+.page {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
 }
+
 .first-button {
     border-radius: 50%;
 }
-.hover-btn-page{
+
+.hover-btn-page {
     transition: 0.3s ease-in-out;
 }
-.hover-btn-page:hover{
-    background-color:  rgba(0, 0, 0, 0.08)!important;
+
+.hover-btn-page:hover {
+    background-color: rgba(0, 0, 0, 0.08) !important;
     transition: 0.2s ease-in-out;
 }
-.icon-page{
+
+.icon-page {
     top: 3px;
     left: 2.5px;
 }
-.btn-page{
+
+.btn-page {
     width: 30px;
     height: 30px;
     background-color: #fdfdfd;

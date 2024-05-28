@@ -380,7 +380,6 @@ export default function DialogCandidateFormCreate() {
   }
 
   const [selectedValuePassFaild, setSelectedValuePassFaild] = useState("");
-  console.log(selectedValuePassFaild);
 
   const handleChangePassFaild = (e) => {
     setSelectedValuePassFaild(e.target.value);

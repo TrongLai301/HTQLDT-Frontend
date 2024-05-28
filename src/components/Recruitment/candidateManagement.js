@@ -1,6 +1,7 @@
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ClearIcon from "@mui/icons-material/Clear";
 import {
+    Autocomplete,
     Box,
     Dialog,
     DialogContent,
@@ -8,7 +9,8 @@ import {
     IconButton,
     InputLabel,
     MenuItem,
-    Select
+    Select,
+    TextField
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -76,8 +78,8 @@ export default function CandidateManagement() {
     };
     const listTestSelect = [
         { id: "", text: "Trạng thái" },
-        { id: "Chưa có kết quả", text: "Chưa có kết quả"},
-        { id: "Đã có kết quả", text: "Đã có kết quả"},
+        { id: "Chưa có kết quả", text: "Chưa có kết quả" },
+        { id: "Đã có kết quả", text: "Đã có kết quả" },
         { id: "Đã gửi email cảm ơn", text: "Đã gửi email cảm ơn" },
         { id: "Đã hẹn ngày thực tập", text: "Đã hẹn ngày thực tập" },
         { id: "Không nhận việc", text: "Không nhận việc" },
@@ -106,11 +108,26 @@ export default function CandidateManagement() {
             console.error('Error searching by status:', error);
         }
     };
-
-    const handlePlanChange = (event) => {
-        setSelectPlan(event.target.value);
-        handleSubmitSelectPlan(event.target.value, page);
+    const [inputValue, setInputValue] = useState('');
+    const handlePlanChange = (event, value) => {
+        if (value) {
+            setSelectPlan(value.recruitmentPlan.name);
+            handleSubmitSelectPlan(value.recruitmentPlan.name, page);
+        } else {
+            setSelectPlan(null);
+            handleSubmitSelectPlan('', page);
+        }
     };
+
+
+    const handleEnterChange = (event, value) => {
+        if (event.key === "Enter" && event.target) {
+            setInputValue(event.target.value)
+            console.log(event.target.value);
+            setSelectPlan(event.target.value);
+            handleSubmitSelectPlan(event.target.value, page);
+        }
+    }
 
     const handleSubmitSelectPlan = async (selectPlan, pageNumber) => {
         try {
@@ -173,6 +190,9 @@ export default function CandidateManagement() {
         getAll(value - 1);
     }
 
+    const handleGetOptionLabel = (option) => option.recruitmentPlan.name;
+
+
     return (
         <>
             <Header />
@@ -215,7 +235,7 @@ export default function CandidateManagement() {
                         </DialogContent>
                     </Dialog>
                     <div className=" mt-2">
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between w-auto-complete">
                             <div className="d-flex">
                                 <div className="search-input position-relative">
                                     <form onSubmit={handleSubmitSearch}>
@@ -238,7 +258,7 @@ export default function CandidateManagement() {
                                             ))}
                                     </Select>
                                 </FormControl>
-                                <FormControl className="ml-10 select-form" sx={{ minWidth: 300 }}>
+                                {/* <FormControl className="ml-10 select-form" sx={{ minWidth: 300 }}>
                                     <InputLabel htmlFor="grouped-select">Kế hoạch tuyển dụng</InputLabel>
                                     <Select defaultValue=""
                                         id="grouped-select"
@@ -253,7 +273,38 @@ export default function CandidateManagement() {
                                                 <MenuItem value={item.recruitmentPlan.name} key={item.recruitmentPlan.name} onClick={handleSubmitSelectPlan}>{item.recruitmentPlan.name}</MenuItem>
                                             ))}
                                     </Select>
-                                </FormControl>
+                                </FormControl> */}
+                                <Autocomplete
+                                    className='ml-10 select-form auto-complete'
+                                    disablePortal
+                                    id="combo-box-demo"
+                                    options={recruitmentPlan}
+                                    onChange={handlePlanChange}
+                                    inputValue={inputValue}
+                                    onInputChange={(event, value) => {
+                                        if (event && event.target) {
+                                            setInputValue(event.target.value);
+                                        } else {
+                                            setInputValue(value);
+                                        }
+                                        // setInputValue(event.target.value);
+
+                                    }}
+                                    onKeyPress={handleEnterChange}
+                                    // onBlur={handlePlanChange}
+                                    getOptionLabel={handleGetOptionLabel}
+                                    sx={{ width: 300 }}
+                                    renderInput={(params) => <TextField {...params} label="Kế hoạch tuyển dụng" />}
+                                    filterOptions={(options, { inputValue }) => {
+
+                                        // Lọc các mục phù hợp với giá trị nhập vào, không tạo ra các mục trùng lặp
+                                        const filtered = options.filter(option => option.recruitmentPlan.name.toLowerCase().includes(inputValue.toLowerCase()));
+                                        // Sử dụng Set để loại bỏ các mục trùng lặp
+                                        return Array.from(new Set(filtered.map(option => option.name)))
+                                            .map(name => options.find(option => option.name === name));
+                                    }}
+                                />
+
                             </div>
                             <DialogCandidateFormCreate />
                         </div>
@@ -305,6 +356,14 @@ export default function CandidateManagement() {
                     </div>
                 </div>
             </Box>
+            {/* <input list='test' name='testw' id='testid'/>
+                <datalist id='test'>
+                    {
+                        recruitmentPlan.map(item => (
+                            <option value={item.recruitmentPlan.name} key={item.recruitmentPlan.name} onClick={handleSubmitSelectPlan} />
+                        ))}
+                </datalist> */}
+
             <Footer />
         </>
     )
