@@ -75,7 +75,7 @@ export default function DialogPersonalFormWatch({ id , userRoles }) {
 
     return (
         <>
-        { hasRoleAdmin() &&
+       
             <Tooltip title="Xem chi tiết">
                 <RemoveRedEyeIcon
                     data-bs-toggle="tooltip"
@@ -85,7 +85,7 @@ export default function DialogPersonalFormWatch({ id , userRoles }) {
                     onClick={handleClickFormOpen}
                 />
             </Tooltip>
-        }
+        
             
             <Dialog
                 id="formWatch"
@@ -229,7 +229,8 @@ export default function DialogPersonalFormWatch({ id , userRoles }) {
                                     ></textarea>
                                 </div>
                             ) : (
-                                <div className="col-md-12 mt-0 d-flex">
+                                hasRoleAdmin() && (
+                                    <div className="col-md-12 mt-0 d-flex">
                                     <div className="col-md-3 mt-2">
                                         <button
                                             type="button"
@@ -249,6 +250,8 @@ export default function DialogPersonalFormWatch({ id , userRoles }) {
                                         </button>
                                     </div>
                                 </div>
+                                )
+                                
                             ))
                         )}
                     </form>

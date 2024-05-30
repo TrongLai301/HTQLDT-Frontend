@@ -110,11 +110,13 @@ export default function PersonalNeeds() {
         }
     };
     const [userLogin, setUserLogin] = useState([]);
+    const [idUSer, setIdUser] = useState();
     async function getAll(pageNumber) {
             const user = JSON.parse(localStorage.getItem("currentUser"))
             if (user != null) {
                 try {
-                    setUserLogin(user.roles)
+                    setUserLogin(user.roles);
+                    setIdUser(user.id);
                     axios.defaults.headers.common["Authorization"] = "Bearer " + user.accessToken;
                     const response = await axios.get(`http://localhost:8080/api/recruitmentRequests/search?name=${valueRecuitments}&status=${selectedStatus}&page=${pageNumber}`);
                     setRecuitment(response.data.content);
@@ -247,9 +249,9 @@ export default function PersonalNeeds() {
                                             <td className="text-right p-tricklord">
                                                 <DialogPersonalFormWatch id={item.id} userRoles={userLogin} />
                                                 {item.status === "Bị từ chối bởi DET" || item.status.toLowerCase() === "đã xác nhận" || item.status === "Đang tuyển dụng" || item.status === "Bị từ chối bởi DECAN" ? (
-                                                    <DialogPersonalFormUpdate id={item.id} check={true} userRoles={userLogin} />
+                                                    <DialogPersonalFormUpdate id={item.id} check={true} userRoles={userLogin} idUser={idUSer} />
                                                 ) : (
-                                                    <DialogPersonalFormUpdate id={item.id} userRoles={userLogin}/>
+                                                    <DialogPersonalFormUpdate id={item.id} userRoles={userLogin} idUser={idUSer}/>
                                                 )}
                                             </td>
                                         </tr>

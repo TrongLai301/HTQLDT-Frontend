@@ -563,3 +563,64 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #fdfdfd;
     border: none;
 }
+.input-disabled {
+    position: relative;
+  }
+  
+  .input-disabled:after {
+    content: "\f057"; /* Unicode cho icon cấm */
+    font-family: "Font Awesome 5 Free"; /* Sử dụng thư viện Font Awesome */
+    font-weight: 900;
+    color: #dc3545; /* Màu đỏ */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: not-allowed;
+    display: none;
+  }
+  
+  .input-disabled:hover:after,
+  .input-disabled:focus:after {
+    display: block;
+  }
+  .input-container.input-disabled {
+    position: relative;
+  }
+  
+  .input-container.input-disabled:after {
+    content: "\f057"; /* Unicode cho icon cấm */
+    font-family: "Font Awesome 5 Free"; /* Sử dụng thư viện Font Awesome */
+    font-weight: 900;
+    color: #dc3545; /* Màu đỏ */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: not-allowed;
+    display: none;
+  }
+  
+  .input-container.input-disabled:hover:after {
+    display: block;
+  }
+  .select-container.input-disabled {
+    position: relative;
+  }
+  
+  .select-container.input-disabled:after {
+    content: "\f057"; /* Unicode cho icon cấm */
+    font-family: "Font Awesome 5 Free"; /* Sử dụng thư viện Font Awesome */
+    font-weight: 900;
+    color: #dc3545; /* Màu đỏ */
+    position: absolute;
+    top: 62%; /* Thay đổi giá trị này để di chuyển icon cấm */
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: not-allowed;
+    display: none;
+  }
+  
+  .select-container.input-disabled:hover:after {
+    display: block;
+  }

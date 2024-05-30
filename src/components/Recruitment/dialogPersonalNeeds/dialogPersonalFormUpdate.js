@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-export default function DialogPersonalFormUpdate({ id, check,userRoles }) {
+export default function DialogPersonalFormUpdate({ id, check,userRoles,idUser }) {
   const [dateErr, setDateErr] = useState(false);
   const [techErr, setTechErr] = useState(false);
   const [quantityErr, setQuantityErr] = useState(false);
@@ -78,7 +78,7 @@ export default function DialogPersonalFormUpdate({ id, check,userRoles }) {
   // Xử lý số lượng nhân sự
   const formData = useFormik({
     initialValues: {
-      idUser: null,
+      idUser: idUser,
       recruitmentRequest: {
         dateStart: "",
         dateEnd: "",
@@ -93,6 +93,7 @@ export default function DialogPersonalFormUpdate({ id, check,userRoles }) {
       },
     },
     onSubmit: async (values, { setSubmitting }) => {
+      values.idUser = idUser;
       const dateEnd = new Date(values.recruitmentRequest.dateEnd);
       const dateStart = new Date(values.recruitmentRequest.dateStart);
       const name = values.recruitmentRequest.name;

@@ -159,9 +159,11 @@ export default function CandidateManagement() {
     }, [])
 
     const [userLogin, setUserLogin] = useState([]);
+    const [idUser, setIdUser] = useState();
     async function getAll(pageNumber) {
         const user = JSON.parse(localStorage.getItem("currentUser"))
         setUserLogin(user.roles);
+        setIdUser(user.id);
         if (user != null) {
             try {
                 const response = await axios.get(`http://localhost:8080/api/plansIntern/search?keyword=${valueRecuitments}&status=${selectedStatus}&namePlan=${selectPlan}&page=${pageNumber}`);
@@ -343,12 +345,12 @@ export default function CandidateManagement() {
                                     <td className='ws-nowrap'>{item.name}</td>
                                     <td className="text-center">{item.email}</td>
                                     <td className="text-center">{item.phone}</td>
-                                    <td className="text-center">{item.scoreTest}</td>
-                                    <td className="text-center">{item.scoreInterview}</td>
-                                    <td className="text-center">{item.status}</td>
+                                    <td className="text-center">{item.scoreTest || "N/A"}</td>
+                                    <td className="text-center">{item.scoreInterview || "N/A"}</td>
+                                    <td className="text-center">{item.status || "N/A"}</td>
                                     <td className="text-right p-tricklord">
                                         <DialogCandidateFromWatch id={item.id} />
-                                        <DialogCandidateFromUpdate id={item.id} userRoles={userLogin} />
+                                        <DialogCandidateFromUpdate id={item.id} userRoles={userLogin}  />
                                     </td>
                                 </tr>
                             ))}

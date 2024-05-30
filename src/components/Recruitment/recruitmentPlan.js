@@ -111,12 +111,14 @@ export default function RecruitmentPlan() {
         }
     };
     const [userLogin, setUserLogin] = useState([]);
+    const [idUser, setIdUser] = useState();
     async function getAll(pageNumber) {
         const user = JSON.parse(localStorage.getItem("currentUser"))
     
         if (user != null) {
             try {
                 setUserLogin(user.roles);
+                setIdUser(user.id);
                 axios.defaults.headers.common["Authorization"] = "Bearer " + user.accessToken;
                 const response = await axios.get(`http://localhost:8080/api/plans/search?name=${valueRecuitments}&status=${selectedStatus}&page=${pageNumber}`);
                 setRecuitment(response.data.content);
@@ -254,13 +256,13 @@ export default function RecruitmentPlan() {
                                         {item.status === "Bị từ chối " || item.status.toLowerCase() === "đã xác nhận" || item.status === "Bị từ chối bởi DECAN"? (
                                             <DialogRecruitmentPlanFormWatch id={item.id} check={false} statusItem={item.status} reasonItem={item.reason} userRoles={userLogin} />
                                         ) : (
-                                            <DialogRecruitmentPlanFormWatch id={item.id} check={true} userRoles={userLogin} />
+                                            <DialogRecruitmentPlanFormWatch id={item.id} check={true} statusItem={item.status} userRoles={userLogin} />
                                         )}
                                         {item.status === "Bị từ chối " || item.status.toLowerCase() === "đã xác nhận" || item.status === "Bị từ chối bởi DECAN" ? (
 
-                                            <DialogRecruitmentPlanFormUpdate id={item.id} check={true} userRoles={userLogin}/>
+                                            <DialogRecruitmentPlanFormUpdate id={item.id} check={true} userRoles={userLogin} idUser={idUser}/>
                                         ) : (
-                                            <DialogRecruitmentPlanFormUpdate id={item.id} userRoles={userLogin} />
+                                            <DialogRecruitmentPlanFormUpdate id={item.id} userRoles={userLogin} idUser={idUser}/>
                                         )}
                                     </td>
                                 </tr>

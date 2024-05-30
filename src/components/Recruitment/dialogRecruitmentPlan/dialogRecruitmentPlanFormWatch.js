@@ -13,7 +13,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
   const [tenhnology, setTenhnology] = useState([]);
   const navigate = useNavigate();
   const hasRoleAdmin = () => {
-    return userRoles.some((role) => role.authority === "ROLE_ADMIN"|| role.authority === "ROLE_NS");
+    return userRoles.some((role) => role.authority === "ROLE_ADMIN"|| role.authority === "ROLE_HR");
   };
   // Dữ liệu fake
   const formData = useFormik({
@@ -108,7 +108,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
     setOpenFormReason(true);
   };
   return (
-    <>{hasRoleAdmin() && (
+    <>
       <Tooltip title="Xem chi tiết">
         <RemoveRedEyeIcon
           data-bs-toggle="tooltip"
@@ -118,7 +118,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
           onClick={handleClickFormOpen}
         />
       </Tooltip>
-    )}
+   
       
       <Dialog
         id="formWatchRecruitmentPlan"
@@ -276,7 +276,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
                       </p>
                     </td>
                   </tr>
-                  {statusItem === "Đã xác nhận" ? (
+                 
                     <tr>
                       <td>
                         <label
@@ -296,8 +296,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
                         </p>
                       </td>
                     </tr>
-                  ) : ("")
-                  }
+                 
                 </tbody>
               </table>
             </div>
@@ -318,7 +317,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
                   value={formData.values.recruitmentPlan.reason}
                 ></textarea>
               </div>
-            ) : (check ? (
+            ) : (hasRoleAdmin() ? (
               <div className="col-md-12 mt-0 d-flex">
                 <div className="col-md-6 mt-2">
                   <button
@@ -352,6 +351,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
                   ></textarea>
                 </div>
               ) : (
+                hasRoleAdmin() && (
                 <div className="col-md-12 mt-0 d-flex mt-2">
                   <div className="col-md-6 mt-2">
                     <button
@@ -372,6 +372,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
                   </div>
                 </div>
               )
+            )
 
             )}
           </form>

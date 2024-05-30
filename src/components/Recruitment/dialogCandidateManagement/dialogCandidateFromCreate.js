@@ -151,15 +151,8 @@ export default function DialogCandidateFormCreate({userRoles}) {
       values.interviewTime = formattedDateTime;
       values.finalResult = selectedValuePassFaild;
 
-      if (values.scoreInterview === "") {
-        values.scoreInterview = 1;
-      }
-
-      if (values.scoreTest === "") {
-        values.scoreTest = 50;
-      }
       if (values.checkInterview === "") {
-        values.checkInterview = true;
+        values.checkInterview = false;
       }
       // Lấy dữ liệu check
 
@@ -179,7 +172,7 @@ export default function DialogCandidateFormCreate({userRoles}) {
           email,
           phoneNumber,
           recruitmentPlan,
-          status
+          // status
         )
       ) {
         setSubmitting(false);
@@ -256,7 +249,7 @@ export default function DialogCandidateFormCreate({userRoles}) {
     { id: 6, text: "Đã nhận việc" },
   ];
   const hasRoleAdmin = () => {
-    return userRoles.some((role) => role.authority === "ROLE_ADMIN"|| role.authority === "ROLE_NS");
+    return userRoles.some((role) => role.authority === "ROLE_ADMIN"|| role.authority === "ROLE_HR");
   };
   const [openForm, setOpenForm] = useState(false);
   const handleClickFormOpen = () => {
@@ -539,7 +532,7 @@ export default function DialogCandidateFormCreate({userRoles}) {
             </div>
             <div className="col-md-6 mt-1 ">
               <label htmlFor="name" className="form-label grey-text mb-0 mt-2">
-                Kế hoạch tuyển dụng
+                Kế hoạch tuyển dụng <span className="color-red">*</span>
               </label>
               <select
                 className="form-select grey-text"
@@ -580,7 +573,7 @@ export default function DialogCandidateFormCreate({userRoles}) {
                 )}
               </div>
             </div>
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <div className="col-md-12">
                 <h4 className="grey-text mb-1">Kết quả phỏng vấn</h4>
                 <hr className="hr-infor" />
@@ -606,7 +599,7 @@ export default function DialogCandidateFormCreate({userRoles}) {
                   </select>
                 </div>
                 {/*  */}
-                <div className="col-md-4 text-center mt-0 mb-2">
+                {/* <div className="col-md-4 text-center mt-0 mb-2">
                   <label
                     htmlFor="name"
                     className="form-label grey-text mb-0 ws-nowrap"
@@ -634,9 +627,9 @@ export default function DialogCandidateFormCreate({userRoles}) {
                     }
                   />
                 </div>
-              </div>
+              </div> */}
               {/*  */}
-              <div className="col-md-12 mt-2">
+              {/* <div className="col-md-12 mt-2">
                 <label
                   htmlFor="name"
                   className="form-label grey-text mb-0 ws-nowrap"
@@ -709,9 +702,9 @@ export default function DialogCandidateFormCreate({userRoles}) {
                   </p>
                 )}
               </div>
-            </div>
+            </div> */}
 
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <h4 className="grey-text mb-1">Trạng thái</h4>
               <hr className="hr-infor" />
             </div>
@@ -756,7 +749,8 @@ export default function DialogCandidateFormCreate({userRoles}) {
                   />
                 </div>
               </div>
-              <div className=" text-right mt-0 d-flex align-item-flex-end">
+            </div>  */}
+            <div className=" text-right mt-0 d-flex align-item-flex-end justify-content-end mt-3">
                 <div className="send-child position-relative ">
                   <button
                     type="submit"
@@ -766,7 +760,6 @@ export default function DialogCandidateFormCreate({userRoles}) {
                   </button>
                 </div>
               </div>
-            </div>
             <div className="col-md-8  mt-0">
               {errStatus && (
                 <p className="err-valid ws-nowrap ">

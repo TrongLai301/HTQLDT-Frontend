@@ -8,7 +8,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import swal from "sweetalert";
 
-export default function DialogRecruitmentPlanFormUpdate({ check, id,userRoles }) {
+export default function DialogRecruitmentPlanFormUpdate({ check, id,userRoles,idUser }) {
   const [dateErr, setDateErr] = useState(false);
   const [techErr, setTechErr] = useState(false);
   const [errNumberOfPersonal, setErrNumberOfPersonal] = useState(false);
@@ -122,7 +122,7 @@ export default function DialogRecruitmentPlanFormUpdate({ check, id,userRoles })
   
   const formData = useFormik({
     initialValues: {
-      idUser: null,
+      idUser: idUser,
       recruitmentPlan: {
         recruitmentRequest: {
           id: null,
@@ -148,6 +148,7 @@ export default function DialogRecruitmentPlanFormUpdate({ check, id,userRoles })
       ],
     },
     onSubmit: async (values, { setSubmitting }) => {
+      values.idUser = idUser;
       console.log(values.recruitmentPlan.recruitmentRequest.id);
       const personalneed = values.recruitmentPlan.recruitmentRequest.id;
       const nameRecruitmentPlan = values.recruitmentPlan.name;
@@ -172,7 +173,6 @@ export default function DialogRecruitmentPlanFormUpdate({ check, id,userRoles })
         // Dữ liệu hợp lệ, tiến hành gửi dữ liệu
         try {
           values.planDetails = [...tech];
-          values.idUser = 1;
           setSubmitting(true);
           await axios
             .put("http://localhost:8080/api/plans/" + id, values)
