@@ -46,14 +46,14 @@ export default function DialogCandidateFormUpdate({ id, check,userRoles }) {
       setErrEmail(false);
       hasErrEmail = false;
     }
-    var hasErrFinalResult;
-    if (finalResult === '' || finalResult === 'default' || finalResult === 'undefined') {
-      hasErrFinalResult = true;
-      setErrFinalResult(true)
-    } else {
-      hasErrFinalResult = false;
-      setErrFinalResult(false)
-    }
+    // var hasErrFinalResult;
+    // if (finalResult === '' || finalResult === 'default' || finalResult === 'undefined') {
+    //   hasErrFinalResult = true;
+    //   setErrFinalResult(true)
+    // } else {
+    //   hasErrFinalResult = false;
+    //   setErrFinalResult(false)
+    // }
 
     var hasErrPhone;
     if (!validPhone.test(phoneNumber) || phoneNumber === "") {
@@ -84,7 +84,7 @@ export default function DialogCandidateFormUpdate({ id, check,userRoles }) {
 
 
 
-    if (!validFullName.test(fullName) || !validEmail.test(email) || hasErrRecruitmentPlan || hasErrStatus || hasErrPhone || hasErrEmail || hasErrFinalResult) {
+    if (!validFullName.test(fullName) || !validEmail.test(email) || hasErrRecruitmentPlan || hasErrStatus || hasErrPhone || hasErrEmail) {
       return false;
     } else {
       return true;
@@ -128,26 +128,29 @@ export default function DialogCandidateFormUpdate({ id, check,userRoles }) {
       const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
       values.interviewTime = formattedDateTime;
       values.finalResult = finalResult;
-      if (values.finalResult === "true") {
-        values.finalResult = "true";
-      } else {
-        values.finalResult = "false";
+      
+      if(userRoles.some((role) => role.authority === "ROLE_ADMIN"|| role.authority === "ROLE_QLĐT")){
+        if(values.scoreInterview === ""){
+          values.scoreInterview = 1;
+        }
+        if(values.scoreTest === ""){
+          values.scoreTest = 50;
+        }
+        if (values.finalResult === "true") {
+          values.finalResult = "true";
+        } else {
+          values.finalResult = "false";
+        }
       }
-      if(values.scoreInterview === ""){
-        values.scoreInterview = 1;
-      }
-      if(values.scoreTest === ""){
-        values.scoreTest = 50;
-      }
+     
       // Lấy dữ liệu check
       const fullName = values.name;
       const email = values.email;
       const phoneNumber = values.phone;
       const recruitmentPlan = values.recruitmentPlan.id;
-      const status = values.status;
       // checkValid(fullName, email, phoneNumber, recruitmentPlan, status)
 
-      if (!checkValid(fullName, email, phoneNumber, recruitmentPlan, status, finalResult)) {
+      if (!checkValid(fullName, email, phoneNumber, recruitmentPlan)) {
         setSubmitting(false);
         return;
       } else {
