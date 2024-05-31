@@ -302,79 +302,81 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
             </div>
 
             {formData.values.recruitmentPlan.status === "Bị từ chối bởi DET" ? (
-              <div className="col-md-12  d-flex ">
-                <label
-                  htmlFor="time"
-                  style={{ color: "#6F6F6F", whiteSpace: "nowrap" }}
-                  className="form-label fs-20 me-2"
-                >
-                  Lý do:
-                </label>
-                <textarea
-                  readOnly
-                  className="form-control resize pt-2 w-618"
-                  style={{ color: "#838383" }}
-                  value={formData.values.recruitmentPlan.reason}
-                ></textarea>
-              </div>
-            ) : (hasRoleAdmin() ? (
-              <div className="col-md-12 mt-0 d-flex">
-                <div className="col-md-6 mt-2">
-                  <button
-                    type="button"
-                    className="btn btn-danger w-100 bg-clr-danger btn-edit stop"
-                    onClick={handleCloseWatchOpenReason}
-                  >
-                    Từ chối
-                  </button>
-                </div>
-                <div className="col-md-6 mt-2 ms-2">
-                  <button type="button" onClick={approve} className=" btn-edit btn btn-success w-98    bg-clr-success">
-                    Phê duyệt
-                  </button>
-                </div>
-              </div>)
-              : statusItem === "Bị từ chối bởi DECAN" ? (
-                <div className="col-md-12 mt-2 d-flex ">
-                  <label
-                    htmlFor="time"
-                    style={{ color: "#6F6F6F", whiteSpace: "nowrap" }}
-                    className="form-label fs-20 me-2"
-                  >
-                    Lý do:
-                  </label>
-                  <textarea
-                    readOnly
-                    className="form-control resize pt-2 "
-                    style={{ color: "#838383" }}
-                    value={reasonItem}
-                  ></textarea>
-                </div>
-              ) : (
-                hasRoleAdmin() && (
-                <div className="col-md-12 mt-0 d-flex mt-2">
-                  <div className="col-md-6 mt-2">
-                    <button
-                      type="button"
-                      style={{ height: '42px' }}
-                      className="btn btn-primary w-100 bg-clr-primary btn-edit stop"
-                    >
-                      Xem kết quả tuyển dụng
-                    </button>
-                  </div>
-                  <div className="col-md-6 mt-2 ms-2">
-                    <button
-                      type="button"
-                      style={{ height: '42px' }}
-                      className=" btn-edit btn btn-success w-98    bg-clr-successV1">
-                      Xem kết quả đào tạo
-                    </button>
-                  </div>
-                </div>
-              )
-            )
+  <div className="col-md-12  d-flex ">
+    <label
+      htmlFor="time"
+      style={{ color: "#6F6F6F", whiteSpace: "nowrap" }}
+      className="form-label fs-20 me-2"
+    >
+      Lý do:
+    </label>
+    <textarea
+      readOnly
+      className="form-control resize pt-2 w-618"
+      style={{ color: "#838383" }}
+      value={formData.values.recruitmentPlan.reason}
+    ></textarea>
+  </div>
+) : formData.values.recruitmentPlan.status === "Đã gửi" ?(
+  hasRoleAdmin() ? (  <div className="col-md-12 mt-0 d-flex">
+  <div className="col-md-6 mt-2">
+    <button
+      type="button"
+      className="btn btn-danger w-100 bg-clr-danger btn-edit stop"
+      onClick={handleCloseWatchOpenReason}
+    >
+      Từ chối
+    </button>
+  </div>
+  <div className="col-md-6 mt-2 ms-2">
+    <button
+      type="button"
+      onClick={approve}
+      className="btn-edit btn btn-success w-98 bg-clr-success"
+    >
+      Phê duyệt
+    </button>
+  </div>
+</div>) :(<></>)
 
-            )}
+) : formData.values.recruitmentPlan.status === "Bị từ chối bởi DECAN" ? (
+  <div className="col-md-12 mt-2 d-flex ">
+    <label
+      htmlFor="time"
+      style={{ color: "#6F6F6F", whiteSpace: "nowrap" }}
+      className="form-label fs-20 me-2"
+    >
+      Lý do:
+    </label>
+    <textarea
+      readOnly
+      className="form-control resize pt-2 "
+      style={{ color: "#838383" }}
+      value={reasonItem}
+    ></textarea>
+  </div>
+) : formData.values.recruitmentPlan.status === "Đã xác nhận" ? (
+  <div className="col-md-12 mt-0 d-flex mt-2">
+  <div className="col-md-6 mt-2">
+    <button
+      type="button"
+      style={{ height: '42px' }}
+      className="btn btn-primary w-100 bg-clr-primary btn-edit stop"
+    >
+      Xem kết quả tuyển dụng
+    </button>
+  </div>
+  <div className="col-md-6 mt-2 ms-2">
+    <button
+      type="button"
+      style={{ height: '42px' }}
+      className="btn-edit btn btn-success w-98 bg-clr-successV1"
+    >
+      Xem kết quả đào tạo
+    </button>
+  </div>
+</div>) 
+  : (<></>)}
           </form>
         </DialogTitle>
       </Dialog>
