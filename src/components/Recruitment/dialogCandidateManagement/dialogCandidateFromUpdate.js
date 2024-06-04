@@ -236,9 +236,7 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
   const hasRoleHR = () => {
     return userRoles.some((role) => role.authority === "ROLE_HR");
   };
-  const hasRoleKSCL = () => {
-    return userRoles.some((role) => role.authority === "ROLE_QC");
-  };
+
   const [openForm, setOpenForm] = useState(false);
   const handleClickFormOpen = () => {
     setOpenForm(true);
@@ -298,7 +296,7 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
 
     return (
       <>
-        {hasRoleAdmin() && (
+        {hasRoleAdmin()  && (
           <div className="d-flex justify-content-center align-items-center">
             <RemoveIcon onClick={handleClickCountMinus} className="me-1" />
             <input
@@ -369,7 +367,7 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
 
     return (
       <>
-        {hasRoleAdmin() && (
+        {hasRoleAdmin()  && (
           <div className="d-flex justify-content-center align-items-center">
             <RemoveIcon onClick={handleClickCountMinus} className="me-1" />
             <input
@@ -413,13 +411,13 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
 
   return (
     <>
-      {hasRoleKSCL() ? ("") : (
-        <Tooltip title="Chỉnh sửa chi tiết">
+      {( hasRoleAdmin() || hasRoleHR() ) ? (    <Tooltip title="Chỉnh sửa chi tiết">
           <CreateIcon
             className="color-orange pencil-btn font-size-medium hover-warning cursor-pointer"
             onClick={handleClickFormOpen}
           />
-        </Tooltip>
+        </Tooltip>) : (
+    ""
       )
       }
 
@@ -430,7 +428,7 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle> {hasRoleAdmin() && (<>
+        <DialogTitle> {hasRoleAdmin()   && (<>
           <form className="row g-3" onSubmit={formData.handleSubmit}>
             {/* Form 1 */}
             <div className="col-md-12">
@@ -736,7 +734,23 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
                   >
                     Cập nhật trạng thái
                   </label>
-                  <select
+                  {formData.values.status === "Đã nhận việc" ? (
+   <select
+   className="form-select grey-text"
+   aria-label="Default select example"
+   value={formData.values.status}
+   onChange={formData.handleChange}
+   id="status"
+   name="status"
+   disabled
+ >
+   {listTestSelect.map((item) => (
+     <option key={item.id} value={item.text}>
+       {item.text}
+     </option>
+   ))}
+ </select>
+                  ) : (<select
                     className="form-select grey-text"
                     aria-label="Default select example"
                     value={formData.values.status}
@@ -749,7 +763,9 @@ export default function DialogCandidateFormUpdate({ id, check, userRoles }) {
                         {item.text}
                       </option>
                     ))}
-                  </select>
+                  </select>)
+                }
+               
                 </div>
                 <div className="col-md-7 ms-4">
                   <label
