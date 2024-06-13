@@ -105,11 +105,14 @@ export function Notification() {
 
     const markReaded = async (index) => {
         renderData[index].isRead = true
-        await setRenderData([...renderData])
+        sendDatas()
+        // await setRenderData([...renderData])
     }
     const markAllReaded = async () => {
-        renderData.map((item) => {
+        renderData.map((item,index) => {
+            console.log(`${index} before` + item.isRead)
             item.isRead = true
+            console.log(`${index} after` + item.isRead)
         })
         await setRenderData([...renderData])
     }
@@ -163,7 +166,7 @@ export function Notification() {
                         <div className={"header"}>
                             <div className={'top-header'}>
                                 <h4 className={"title"}>Thông báo</h4>
-                                <SubmenuNotification markAllReaded={markAllReaded}/>
+                                <SubmenuNotification markAllReaded={() => {markAllReaded().then(sendDatas())}}/>
                             </div>
                             <div className={"btns"}>
                                 <div
@@ -203,6 +206,7 @@ export function Notification() {
                                                 }
                                             }))
                                         }}
+                                        markReadFunc={() => {markReaded(index)}}
                                         index={index}
                                         link={notiItem.link}
                                     />

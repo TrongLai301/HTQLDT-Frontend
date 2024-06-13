@@ -11,12 +11,11 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import logoImage from '../../../assets/image/logoCodeGym.png';
+import logoImage from '../../assets/image/CodeGym.jpg';
 import './pageWait.css';
 import { useEffect } from "react";
-
 import { useSnackbar } from 'notistack';
-import { doLogout } from '../../checkToken/AuthContext';
+import { doLogout } from '../checkToken/AuthContext';
 
 
 function Copyright(props) {

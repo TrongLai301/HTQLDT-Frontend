@@ -42,7 +42,6 @@ export default function Email() {
         setDataSendRecruitmentPlan(recruitmentPlan);
     }
 
-
     useEffect(() => {
         check();
     }, [toSend])
@@ -162,7 +161,6 @@ export default function Email() {
             }
         };
     }, []);
-
 
     return null;
 }

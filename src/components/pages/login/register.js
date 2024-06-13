@@ -16,6 +16,7 @@ import axios from "axios";
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { useNavigate } from "react-router-dom";
 import logoImage from '../../../assets/image/logoCodeGym.png';
+import logoGoogle from '../../../assets/image/google.png';
 import { useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import './login.css';
@@ -198,27 +199,35 @@ function Register() {
                     email: userInfo.data.email,
                     password: "Email0" + userInfo.data.email,
                 };
-                axios.post("http://localhost:8080/register", dataGoogle).then(
+                console.log(dataGoogle);
+                axios.post("http://localhost:8080/loginGoogle", dataGoogle).then(
                     res => {
-                        console.log(res);
-                        if (res.data.code) {
-                            if (res.data.code === "400" || res.data.code === "409") {
-                                localStorage.setItem("currentUser", JSON.stringify(res.data.data))
-                                enqueueSnackbar(res.data.msg, { variant: "error", anchorOrigin: { horizontal: "right", vertical: "top" } });
-                            }
+                        if (res.data.code === "401") {
+                            enqueueSnackbar(res.data.msg, { variant: "error", anchorOrigin: { horizontal: "right", vertical: "top" } });
                         }
-
-                        else if (res.status == 200) {
-                            console.log(res);
-                            // localStorage.setItem("currentUser", JSON.stringify(res.data.data))
-                            enqueueSnackbar("Đăng ký thành công, chờ xác nhận", { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
+                        if (res.data.code === "200") {
+                            localStorage.setItem("currentUser", JSON.stringify(res.data.data))
+                            enqueueSnackbar('Đăng nhập thành công !', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
+                            navigate("/dashboard")
+                        }
+                        if (res.data.code === "201") {
+                            localStorage.setItem("currentUser", JSON.stringify(res.data.data))
+                            localStorage.setItem("pendingUser", JSON.stringify(dataGoogle))
                             sendNotifications(
                                 null,
                                 `Có người dùng mới đăng ký với email <b>${res.data.email}</b> `,
                                 ['ROLE_ADMIN'],
                                 null,
                                 `/users?idUser=${res.data.id}`)
-                            navigate("/login")
+                            enqueueSnackbar('Đăng nhập thành công!', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
+                            navigate("/pageWait", { state: { dataGoogle } })
+                        }
+
+                        if (res.data.code === "202") {
+                            localStorage.setItem("currentUser", JSON.stringify(res.data.data))
+                            localStorage.setItem("pendingUser", JSON.stringify(dataGoogle))
+                            enqueueSnackbar('Đăng nhập thành công!', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
+                            navigate("/pageWait", { state: { dataGoogle } })
                         }
                         setFlagValidate({ ...flagValidate, validSubmit: true })
                     }
@@ -337,8 +346,9 @@ function Register() {
                             <span>Already have an account? <a href="http://localhost:3000/login" class="link login-link">Login</a></span>
                         </div>
                         <div class="line" sx={{ mt: 2 }}></div>
-                        <Button fullWidth sx={{ mt: 2, mb: 2, fontWeight: 800 }} variant="outlined" startIcon={<GoogleIcon />} size='medium' onClick={() => registerAccountGoogle()}>
-                            Register with Google
+                        <Button fullWidth sx={{ mt: 2, mb: 2, fontSize: "50", fontWeight: 550 }} variant="outlined" size='medium' onClick={() => registerAccountGoogle()}>
+                            <img src={logoGoogle} style={{ width: '35px', height: '35px' }} />
+                            Login with Google
                         </Button>
                     </Box>
                 </Box>

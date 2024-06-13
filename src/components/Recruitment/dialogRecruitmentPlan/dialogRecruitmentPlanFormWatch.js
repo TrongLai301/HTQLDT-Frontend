@@ -32,7 +32,7 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
   const hasRoleHR = () => {
     return userRoles.some((role) => role.authority === "ROLE_HR");
   };
-  const shouldShowLink = !(hasRoleHR() || hasRoleDM());
+  const shouldShowLink = !(hasRoleHR());
 
   const [dropProgress, setDropProgress] = useState(true);
   const clickProgress = () => {
@@ -557,7 +557,9 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
                 ></textarea>
               </div>
             ) : formData.values.recruitmentPlan.status === "Đã gửi" ? (
-              hasRoleAdmin() ? (<div className="col-md-12 mt-0 d-flex">
+              hasRoleHR() ? (
+              <div className="col-md-12 mt-0 d-flex">
+                
                 <div className="col-md-6 mt-2">
                   <button
                     type="button"
@@ -580,25 +582,32 @@ export default function DialogRecruitmentPlanFormWatch({ id, check, statusItem, 
 
             ) : formData.values.recruitmentPlan.status === "Bị từ chối bởi DECAN" ? (
               <></>
-            ) : formData.values.recruitmentPlan.status === "Đã xác nhận" ? (
+            ) : formData.values.recruitmentPlan.status === "Đã xác nhận" || formData.values.recruitmentPlan.status === "Đã hoàn thành"   ? (
               <div className="col-md-12 mt-0 d-flex mt-2">
                 <div className="col-md-6 mt-2">
-                  <button
+               <Link
+                                      to={`/recruitment/candidateManagement?planName=${steps.planName}`}
+                                      className="a-progress cursor-pointer">
+                <button
                     type="button"
                     style={{ height: '42px' }}
                     className="btn btn-primary w-100 bg-clr-primary btn-edit stop"
                   >
                     Xem kết quả tuyển dụng
                   </button>
+                </Link>
                 </div>
                 <div className="col-md-6 mt-2 ms-2">
-                  <button
+                <Link
+                                      to={`/training?&planName=${steps.planName}`}
+                                      className="a-progress cursor-pointer"> <button
                     type="button"
                     style={{ height: '42px' }}
                     className="btn-edit btn btn-success w-98 bg-clr-successV1"
                   >
                     Xem kết quả đào tạo
-                  </button>
+                  </button></Link>
+                 
                 </div>
               </div>)
               : (<></>)

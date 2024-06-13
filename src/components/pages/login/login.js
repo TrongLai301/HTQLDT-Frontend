@@ -15,6 +15,7 @@ import axios from "axios";
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { useLocation, useNavigate } from "react-router-dom";
 import logoImage from '../../../assets/image/logoCodeGym.png';
+import logoGoogle from '../../../assets/image/google.png';
 import { useState } from "react";
 
 import { GoogleLogin } from '@react-oauth/google';
@@ -23,6 +24,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { Password } from '@mui/icons-material';
 import './login.css';
 import GoogleIcon from '@mui/icons-material/Google';
+import { sendNotifications } from "../../Notification/notification";
 
 import { useEffect } from 'react';
 import { elements } from 'chart.js';
@@ -109,6 +111,7 @@ function Login() {
             enqueueSnackbar("Có lỗi ở phía máy chủ", { variant: "error", anchorOrigin: { horizontal: "right", vertical: "top" }, autoHideDuration: 3000 });
             setFlagValidate({ ...flagValidate, validSubmit: true })
         })
+       
     };
 
     // Ép buộc component re-render
@@ -182,13 +185,14 @@ function Login() {
                     }
                 });
                 const dataGoogle = {
+                    name: userInfo.data.name,
+                    phone: "",
                     email: userInfo.data.email,
-                    password: "Email0" + userInfo.data.email
+                    password: "Email0" + userInfo.data.email,
                 };
                 console.log(dataGoogle);
-                axios.post("http://localhost:8080/login", dataGoogle).then(
+                axios.post("http://localhost:8080/loginGoogle", dataGoogle).then(
                     res => {
-                        console.log(res.data.code);
                         if (res.data.code === "401") {
                             enqueueSnackbar(res.data.msg, { variant: "error", anchorOrigin: { horizontal: "right", vertical: "top" } });
                         }
@@ -197,13 +201,25 @@ function Login() {
                             enqueueSnackbar('Đăng nhập thành công !', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
                             navigate("/dashboard")
                         }
+                        if (res.data.code === "201") {
+                            localStorage.setItem("currentUser", JSON.stringify(res.data.data))
+                            localStorage.setItem("pendingUser", JSON.stringify(dataGoogle))
+                            sendNotifications(
+                                null,
+                                `Có người dùng mới đăng ký với email <b>${res.data.email}</b> `,
+                                ['ROLE_ADMIN'],
+                                null,
+                                `/users?idUser=${res.data.id}`);
+                            enqueueSnackbar('Đăng nhập thành công !', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
+                            navigate("/pageWait", { state: { dataGoogle } })
+                        }
+
                         if (res.data.code === "202") {
                             console.log(res.data);
                             localStorage.setItem("currentUser", JSON.stringify(res.data.data))
                             localStorage.setItem("pendingUser", JSON.stringify(dataGoogle))
-                            enqueueSnackbar(res.data.msg, { variant: "error", anchorOrigin: { horizontal: "right", vertical: "top" } });
-                            navigate("/pageWait", {state: {dataGoogle}})
-
+                            enqueueSnackbar('Đăng nhập thành công!', { variant: "success", anchorOrigin: { horizontal: "right", vertical: "top" } });
+                            navigate("/pageWait", { state: { dataGoogle } })
                         }
                         setFlagValidate({ ...flagValidate, validSubmit: true })
                     }
@@ -300,7 +316,8 @@ function Login() {
 
                         <div class="line" sx={{ mt: 2 }}></div>
 
-                        <Button fullWidth sx={{ mt: 2, mb: 2, fontWeight: 800}} variant="outlined" startIcon={<GoogleIcon />} size='medium' onClick={() => loginAccountGoogle()}>
+                        <Button fullWidth sx={{ mt: 2, mb: 2, fontWeight: 800}} variant="outlined" size='medium' onClick={() => loginAccountGoogle()}>
+                            <img src={logoGoogle} style={{ width: '40px', height: '40px' }} />
                             Login with Google
                         </Button>
                     </Box>

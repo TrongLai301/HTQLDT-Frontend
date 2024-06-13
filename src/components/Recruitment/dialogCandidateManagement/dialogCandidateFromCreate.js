@@ -174,7 +174,6 @@ export default function DialogCandidateFormCreate({ userRoles }) {
 
       checkValid(fullName, email, phoneNumber, recruitmentPlan);
       setSubmitting(false);
-      return;
 
       if (
         !checkValid(

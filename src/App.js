@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './components/pages/login/login';
 import Register from './components/pages/login/register';
-import PageWait from './components/stats/standbyPage/pageWait';
+import PageWait from './components/standbyPage/pageWait';
  import Users from './components/users/users';
 import AuthContext from './components/checkToken/AuthContext';
 import NotFoundPage from './components/pages/NotFoundPage/notFoundPage';
