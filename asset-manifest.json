@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/HTQLDT-FE/static/css/main.24d6b797.css",
+    "main.js": "/HTQLDT-FE/static/js/main.7005b53d.js",
+    "static/js/213.343e9a7e.chunk.js": "/HTQLDT-FE/static/js/213.343e9a7e.chunk.js",
+    "static/js/455.d28dd6d7.chunk.js": "/HTQLDT-FE/static/js/455.d28dd6d7.chunk.js",
+    "static/js/453.bea66239.chunk.js": "/HTQLDT-FE/static/js/453.bea66239.chunk.js",
+    "static/media/htqldt707.mp4": "/HTQLDT-FE/static/media/htqldt707.211384825325e67152a4.mp4",
+    "static/media/PracticeImage.jpg": "/HTQLDT-FE/static/media/PracticeImage.c6168e59e3bb79a66f11.jpg",
+    "static/media/img.png": "/HTQLDT-FE/static/media/img.5f8aa4efe3d87bd5abd9.png",
+    "static/media/logoCodeGym.png": "/HTQLDT-FE/static/media/logoCodeGym.1e8a6b7f46c5ecedaba9.png",
+    "static/media/CodeGym.jpg": "/HTQLDT-FE/static/media/CodeGym.f4204584f5139d31b05f.jpg",
+    "index.html": "/HTQLDT-FE/index.html",
+    "main.24d6b797.css.map": "/HTQLDT-FE/static/css/main.24d6b797.css.map",
+    "main.7005b53d.js.map": "/HTQLDT-FE/static/js/main.7005b53d.js.map",
+    "213.343e9a7e.chunk.js.map": "/HTQLDT-FE/static/js/213.343e9a7e.chunk.js.map",
+    "455.d28dd6d7.chunk.js.map": "/HTQLDT-FE/static/js/455.d28dd6d7.chunk.js.map",
+    "453.bea66239.chunk.js.map": "/HTQLDT-FE/static/js/453.bea66239.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24d6b797.css",
+    "static/js/main.7005b53d.js"
+  ]
+}
