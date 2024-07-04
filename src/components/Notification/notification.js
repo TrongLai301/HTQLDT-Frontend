@@ -255,6 +255,7 @@ export async function sendNotifications(
         link = notiPre + link
     }
     date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    
     const currentUser = JSON.parse(localStorage.getItem("currentUser"))
     const notificationInfo = {
         creatorId: creatorId ,
